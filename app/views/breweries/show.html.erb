@@ -7,6 +7,13 @@
 <i>
   Established in <%= @brewery.year %>
 </i>
+<hr>
+<p>Number of beers: <%= @brewery.beers.count %></p>
+<p>
+  <% if !@brewery.ratings.empty? %>
+      With <%= pluralize(@brewery.ratings.count, 'rating') %>, average of <%= @brewery.average_rating %>
+  <% end %>
+</p>
 
 <table>
     <thead>
@@ -24,4 +31,3 @@
 </table>
 
 <%= link_to 'Edit', edit_brewery_path(@brewery) %> |
-<%= link_to 'Back', breweries_path %>

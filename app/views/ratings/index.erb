@@ -1,0 +1,25 @@
+<table>
+  <thead>
+      <tr>
+        <th>Ratings</th>
+      </tr>
+  </thead>
+
+  <tbody>
+      <% @ratings.each do |rating| %>
+      <tr>
+        <td>
+          <%= rating %>
+        </td>
+        <td>
+          <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+      <% end %>
+      <tr>
+        <td><strong>Number of ratings: <%= @ratings.count %></strong></td>
+      </tr>
+  </tbody>
+</table>
+
+<p><%= link_to 'Create new rating', new_rating_path %></p>
