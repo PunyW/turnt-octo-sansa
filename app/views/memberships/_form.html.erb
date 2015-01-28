@@ -1,0 +1,16 @@
+<%= form_for(@membership) do |f| %>
+    <% if @membership.errors.any? %>
+        <div class="panel">
+          <h2><%= pluralize(@membership.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <%= f.select :beer_club_id, options_from_collection_for_select(@clubs, :id, :to_s) %>
+    <%= f.submit 'Join club' %>
+<% end %>

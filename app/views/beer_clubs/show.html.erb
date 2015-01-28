@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<div class="panel">
+    <h3>
+      <strong>Name:</strong>
+      <%= @beer_club.name %>
+    </h3>
+
+    <p>
+      <strong>Established:</strong>
+      <%= @beer_club.founded %>
+    </p>
+    <p>
+      <strong>Home city:</strong>
+      <%= @beer_club.city %>
+    </p>
+</div>
+
+<% if @beer_club.users.count.nonzero? %>
+    <table>
+      <thead>
+      <tr>
+        <th>Members</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @beer_club.users.each do |user| %>
+          <tr>
+            <td><%= user.username %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>
+
+<%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
+<%= link_to 'Back', :back %>

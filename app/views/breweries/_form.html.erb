@@ -1,6 +1,6 @@
 <%= form_for(@brewery) do |f| %>
   <% if @brewery.errors.any? %>
-    <div id="error_explanation">
+    <div class="panel">
       <h2><%= pluralize(@brewery.errors.count, "error") %> prohibited this brewery from being saved:</h2>
 
       <ul>

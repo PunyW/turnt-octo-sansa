@@ -12,7 +12,7 @@
           <%= rating %>
         </td>
         <td>
-          <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to rating.user.username, rating.user %>
         </td>
       </tr>
       <% end %>
