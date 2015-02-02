@@ -32,6 +32,7 @@ gem 'foundation-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'coveralls', require: false
 
 group :development, :test do
   gem 'better_errors'
