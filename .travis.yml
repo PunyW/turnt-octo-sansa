@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+- 2.0.0
+script:
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: Yv6305ngppb0SzFn74kejVJaH2aedKgIVmDiZCrU/2FgDJycf343SldK5JwUdmGWUkcjCYllWJgq5Za5MLoa8vLgy2LJ+GYY0D8MbVXupEOMt2WUqC0b9DAhIR50RnB7bKv8cFGbEIKNeEpfwh644AYZ7TGeFoBwT4Qna+wZoAs=
+  app: murmuring-plains-2064
+  on:
+    repo: PunyW/wadror

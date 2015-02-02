@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to user, notice: "Welcome back #{params[:username]}!"
     else
-      redirect_to :back, notice: "User #{params[:username]} does not exist!"
+      redirect_to :back, notice: 'Username or password mismatch'
     end
   end
 

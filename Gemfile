@@ -23,10 +23,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'foundation-rails'
-gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+ gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -48,6 +47,20 @@ group :development, :test do
 
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+
+  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-its'
+
+	# Guard
+	gem 'guard'
+	gem 'guard-rspec', require: false
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'simplecov', require: false
 end
 
 group :production do

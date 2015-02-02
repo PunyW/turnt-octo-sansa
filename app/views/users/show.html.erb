@@ -12,6 +12,11 @@
 <p>
   Rated <%= pluralize(@user.ratings.count, 'beer') %> with an average of: <%= @user.average_rating %>
 </p>
+<% if @user.ratings.count > 0 %>
+    <p>Favorite style <%= @user.favorite_style %> and favorite beer <%= @user.favorite_beer %></p>
+    <p>Favorite brewery <%= @user.favorite_brewery.name %></p>
+<% end %>
+
 <% if @user.ratings.count.nonzero? %>
     <table>
       <thead>
@@ -25,7 +30,7 @@
           <tr>
             <td><%= rating %></td>
             <% if @user == current_user %>
-                <td><%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' }, id: "rating#{rating.id}" %></td>
             <% end %>
           </tr>
       <% end %>
