@@ -18,8 +18,6 @@ describe 'Beer' do
       let!(:brewery) { FactoryGirl.create :brewery, name: 'Koff' }
       before :each do
         visit new_beer_path
-        select 'Koff', from:'beer[brewery_id]'
-        select 'Lager', from:'beer[style]'
       end
 
       it 'should be created with correct information' do
