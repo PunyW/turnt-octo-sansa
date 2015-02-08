@@ -9,6 +9,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'support/own_test_helper'
+require 'webmock/rspec'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
