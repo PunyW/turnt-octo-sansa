@@ -1,0 +1,39 @@
+<% if notice %>
+    <div class="panel">
+      <h5><%= notice %></h5>
+    </div>
+<% end %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @style.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @style.description %>
+</p>
+
+<% if @style.beers.count.nonzero? %>
+    <table>
+      <thead>
+      <tr>
+        <th>Beers</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @style.beers.each do |beer| %>
+          <tr>
+            <td><%= link_to beer.name, beer %></td>
+            <td><%= link_to beer.brewery.name, beer.brewery %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>
+
+<% if current_user %>
+    <%= link_to 'Edit', edit_style_path(@style) %> |
+<% end %>
+<%= link_to 'Back', styles_path %>

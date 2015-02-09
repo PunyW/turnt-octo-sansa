@@ -19,13 +19,12 @@ class User < ActiveRecord::Base
 
   def favorite_style
     return nil if ratings.empty?
-    average_of 'style'
+    Style.find_by id: (average_of 'style_id')
   end
 
   def favorite_brewery
     return nil if ratings.empty?
-    brewery = average_of 'brewery_id'
-    Brewery.find_by id: brewery
+    Brewery.find_by id: (average_of 'brewery_id')
   end
 
   def average_of(column)

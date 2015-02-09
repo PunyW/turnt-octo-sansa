@@ -11,5 +11,6 @@ deploy:
   api_key:
     secure: Yv6305ngppb0SzFn74kejVJaH2aedKgIVmDiZCrU/2FgDJycf343SldK5JwUdmGWUkcjCYllWJgq5Za5MLoa8vLgy2LJ+GYY0D8MbVXupEOMt2WUqC0b9DAhIR50RnB7bKv8cFGbEIKNeEpfwh644AYZ7TGeFoBwT4Qna+wZoAs=
   app: murmuring-plains-2064
+  run: "rake db:migrate"
   on:
     repo: PunyW/wadror

@@ -11,11 +11,11 @@ class BeerClubsController < ApplicationController
   # GET /beer_clubs/1
   # GET /beer_clubs/1.json
   def show
-    if not_a_member
+    if current_user && !not_a_member
+      @membership = Membership.find_by_user_id current_user.id
+    else
       @membership = Membership.new
       @membership.beer_club = @beer_club
-    else
-      @membership = Membership.find_by_user_id current_user.id
     end
 
   end

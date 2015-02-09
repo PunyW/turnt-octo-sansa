@@ -13,7 +13,7 @@
   Rated <%= pluralize(@user.ratings.count, 'beer') %> with an average of: <%= @user.average_rating %>
 </p>
 <% if @user.ratings.count > 0 %>
-    <p>Favorite style <%= @user.favorite_style %> and favorite beer <%= @user.favorite_beer %></p>
+    <p>Favorite style <%= @user.favorite_style.name %> and favorite beer <%= @user.favorite_beer %></p>
     <p>Favorite brewery <%= @user.favorite_brewery.name %></p>
 <% end %>
 
