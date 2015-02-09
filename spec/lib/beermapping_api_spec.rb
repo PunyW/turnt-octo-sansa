@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'BeermappingApi' do
-
   describe 'in case of cache miss' do
     it 'when HTTP GET return one entry, it is parsed and returned' do
       canned_answer = <<-END_OF_STRING
