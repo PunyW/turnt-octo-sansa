@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+    <div class="panel">
+      <h5><%= notice %></h5>
+    </div>
+<% end %>
+
 
 <h1>Listing Styles</h1>
 
@@ -14,16 +19,18 @@
   <tbody>
     <% @styles.each do |style| %>
       <tr>
-        <td><%= style.name %></td>
+        <td><%= link_to style.name, style %></td>
         <td><%= style.description %></td>
-        <td><%= link_to 'Show', style %></td>
-        <td><%= link_to 'Edit', edit_style_path(style) %></td>
-        <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user %>
+            <td><%= link_to 'Edit', edit_style_path(style) %></td>
+            <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Style', new_style_path %>
+<% if current_user %>
+    <%= link_to 'New Style', new_style_path %>
+<% end %>

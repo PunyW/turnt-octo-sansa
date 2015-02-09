@@ -4,6 +4,7 @@ include OwnTestHelper
 
 describe 'Beer' do
   let!(:user) { FactoryGirl.create :user }
+  let!(:style) { FactoryGirl.create :style }
   describe 'with signed in user' do
     before :each do
       sign_in(username: 'Pekka', password: 'Foobar1')

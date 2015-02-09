@@ -35,7 +35,7 @@ RSpec.describe User, :type => :model do
     end
 
     it 'is the one with highest rating if several styles rated' do
-      fav_style = 'IPA'
+      fav_style = FactoryGirl.create :style, name:'Test'
       create_beers_with_ratings(10, 10, 10, user)
       create_beers_with_ratings_and_style(20, 20, 20, fav_style, user)
 

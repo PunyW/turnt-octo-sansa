@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :ratings, only: [:index, :new, :create, :destroy]
   resources :memberships, only: [:new, :create, :destroy]
   resources :places, only: [:index, :show]
+  resources :styles
 
   resource :session, only: [:new, :create, :delete]
 
