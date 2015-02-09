@@ -22,7 +22,7 @@
       <% @places.each do |place| %>
           <tr>
             <td><%= place.status %></td>
-            <td><%= link_to place.name, "#{places_path}/#{place.id}" %></td>
+            <td><%= link_to place.name, place_path(place.id) %></td>
             <td><%= "#{place.street}, #{place.zip} #{place.city}" %></td>
             <td><%= place.country %></td>
             <td><%= place.overall %></td>

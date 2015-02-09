@@ -11,13 +11,13 @@ class RouteBeerStylesToStyleTable < ActiveRecord::Migration
   def create_styles
     reversible do |change|
       change.up do
-        Beer.all.group('old_style').each do |beer|
+        Beer.all.group(:old_style).each do |beer|
           Style.create name: beer.old_style, description:'WIP'
         end
       end
 
       change.down do
-        Beer.all.group('old_style').each do |beer|
+        Beer.all.group(:old_style).each do |beer|
           Style.find_by_name(beer.old_style).delete
         end
       end
