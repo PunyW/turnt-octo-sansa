@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+    <div class="panel">
+      <h5><%= notice %></h5>
+    </div>
+<% end %>
 
 <div class="panel">
     <h3>
@@ -34,5 +38,19 @@
     </table>
 <% end %>
 
-<%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
+<% if current_user %>
+    <% if not_a_member %>
+        <%= form_for(@membership) do |f| %>
+            <%= f.hidden_field :beer_club_id %>
+            <%= f.submit value:'Join the club', class: 'button success' %>
+        <% end %>
+    <% else %>
+        <%= form_for(@membership, method: 'delete') do |f| %>
+            <%= f.hidden_field :beer_club_id %>
+            <%= f.submit value: 'End the membership', class: 'button alert' %>
+        <% end %>
+    <% end %>
+
+    <%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
+<% end %>
 <%= link_to 'Back', :back %>
