@@ -1,12 +1,9 @@
-<% if notice %>
-    <div class="panel">
-      <h5><%= notice %></h5>
-    </div>
-<% end %>
-
 <h3>
   <strong>Username:</strong>
   <%= @user.username %>
+  <% if @user.suspended %>
+    <span class="label">account frozen</span>
+  <% end %>
 </h3>
 
 <p>
@@ -56,8 +53,12 @@
     </table>
 <% end %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<% if @user == current_user %>
-    <%= link_to 'Delete account', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% if current_user.admin %>
+  <%= link_to (@user.suspended ? 'Unfreeze account' : 'Freeze account'), toggle_suspension_user_path(@user.id), method: :post, class: 'button alert' %>
 <% end %>
-<%= link_to 'Back', users_path %>
+
+<% if @user == current_user %>
+  <%= link_to 'Edit', edit_user_path(@user), class: 'button info' %>
+  <%= link_to 'Delete account', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button alert' %>
+<% end %>
+<%= link_to 'Back', users_path, class: 'button default' %>

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_that_admin, only: [:toggle_suspension]
 
   # GET /users
   # GET /users.json
@@ -69,6 +70,16 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def toggle_suspension
+    user = User.find(params[:id])
+
+    user.update_attribute :suspended, (not user.suspended)
+    status = user.suspended ? 'frozen' : 'unfrozen'
+
+    redirect_to users_path, notice: "#{user.username} was #{status}"
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

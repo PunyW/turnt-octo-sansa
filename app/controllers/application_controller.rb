@@ -12,10 +12,14 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_that_signed_in
-    redirect_to signin_path, notice:'you should be signed in' if current_user.nil?
+    redirect_to signin_path, alert:'you should be signed in' if current_user.nil?
   end
 
   def not_a_member
     current_user.memberships.find_by(beer_club_id: params[:id]).nil?
+  end
+
+  def ensure_that_admin
+    redirect_to :back, alert: 'You need to have admin privileges to do that' unless current_user.admin?
   end
 end

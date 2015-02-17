@@ -37,10 +37,6 @@ describe 'Rating' do
       visit ratings_path
     end
 
-    it 'correct count is shown' do
-      expect(page).to have_content "Number of ratings: #{@ratings.count}"
-    end
-
     it 'correct ratings are shown' do
       expect(page).to have_content '10'
       expect(page).to have_content 'anonymous'

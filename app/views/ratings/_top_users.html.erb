@@ -1,0 +1,32 @@
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Favorite beer</th>
+    <th>Preferred style</th>
+    <th>Favorite brewery</th>
+    <th>Ratings</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.username %>
+        </td>
+        <td>
+          <%= user.favorite_beer %>
+        </td>
+        <td>
+          <%= user.favorite_style %>
+        </td>
+        <td>
+          <%= user.favorite_brewery.name unless user.favorite_brewery.nil? %>
+        </td>
+        <td>
+          <%= user.ratings_count %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

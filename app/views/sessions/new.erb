@@ -1,9 +1,4 @@
 <h1>Sign in</h1>
-<% if notice %>
-    <div class="panel callout radius">
-      <h5><%= notice %></h5>
-    </div>
-<% end %>
 
 <%= form_tag session_path do %>
     Username: <%= text_field_tag :username, params[:username] %>

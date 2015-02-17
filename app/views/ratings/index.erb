@@ -1,25 +1,41 @@
-<table>
-  <thead>
-      <tr>
-        <th>Ratings</th>
-      </tr>
-  </thead>
+<div class="row">
+  <h1>Rating statistics</h1>
+  <div class="medium-4 columns">
+    <h3>Best breweries</h3>
+    <%= render 'list', stats: @breweries %>
+  </div>
+  <div class="medium-4 columns">
+    <h3>Best beers</h3>
+    <%= render 'list', stats: @beers %>
+  </div>
+  <div class="medium-4 columns">
+    <h3>Best styles</h3>
+    <%= render 'list', stats: @styles %>
+  </div>
+  <div class="medium-12 columns">
+    <h3>Most active users</h3>
+    <%= render 'top_users', users: @users %>
+  </div>
+  <div class="medium-12 columns">
+    <h3>Recent ratings</h3>
+    <table>
+      <tbody>
+        <% @recent.each do |rating| %>
+          <tr>
+            <td>
+              <%= rating %>
+            </td>
+            <td>
+              <%= link_to rating.user.username, rating.user %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-  <tbody>
-      <% @ratings.each do |rating| %>
-      <tr>
-        <td>
-          <%= rating %>
-        </td>
-        <td>
-          <%= link_to rating.user.username, rating.user %>
-        </td>
-      </tr>
-      <% end %>
-      <tr>
-        <td><strong>Number of ratings: <%= @ratings.count %></strong></td>
-      </tr>
-  </tbody>
-</table>
 
-<p><%= link_to 'Create new rating', new_rating_path %></p>
+
+
+<p><%= link_to 'Create new rating', new_rating_path, class: 'button success' %></p>

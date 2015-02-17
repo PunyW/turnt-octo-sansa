@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209184642) do
+ActiveRecord::Schema.define(version: 20150217102647) do
 
   create_table "beer_clubs", force: :cascade do |t|
     t.string   "name"
@@ -32,8 +32,9 @@ ActiveRecord::Schema.define(version: 20150209184642) do
   create_table "breweries", force: :cascade do |t|
     t.string   "name"
     t.integer  "year"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "active",     default: true
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -60,9 +61,12 @@ ActiveRecord::Schema.define(version: 20150209184642) do
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "password_digest"
+    t.integer  "ratings_count",   default: 0
+    t.boolean  "admin"
+    t.boolean  "suspended"
   end
 
 end

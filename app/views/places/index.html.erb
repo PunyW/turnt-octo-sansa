@@ -1,13 +1,6 @@
-<% if notice %>
-    <div class="panel">
-      <h5><%= notice %></h5>
-    </div>
-<% end %>
-
-
 <%= form_tag places_path do %>
     city <%= text_field_tag :city, params[:city] %>
-    <%= submit_tag 'Search' %>
+    <%= submit_tag 'Search', class: 'button success' %>
 <% end %>
 
 <% if @places %>

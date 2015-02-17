@@ -17,17 +17,45 @@ class User < ActiveRecord::Base
     ratings.order(score: :desc).limit(1).first.beer
   end
 
-  def favorite_style
+  def top_rating_of(column)
     return nil if ratings.empty?
-    Style.find_by id: (average_of 'style_id')
+    Rating.joins(:beer).group(column + '_id').calculate(:average, :score).sort_by { |average| average[1]}.reverse!.first[0]
+  end
+
+  def self.top_most_ratings(n)
+    User.order(ratings_count: :desc).limit(n)
   end
 
   def favorite_brewery
-    return nil if ratings.empty?
-    Brewery.find_by id: (average_of 'brewery_id')
+    favorite :brewery
   end
 
-  def average_of(column)
-    Rating.joins(:beer).group(column).calculate(:average, :score).sort_by { |average| average[1]}.reverse!.first[0]
+  def favorite_style
+    favorite :style
   end
+
+  def rated(category)
+    ratings.map{ |r| r.beer.send(category) }.uniq
+  end
+
+  def rating_of(category, item)
+    ratings_of_item = ratings.select do |r|
+      r.beer.send(category) == item
+    end
+    ratings_of_item.map(&:score).sum / ratings_of_item.count
+  end
+
+  def favorite(category)
+    return nil if ratings.empty?
+
+    category_ratings = rated(category).inject([]) do |set, item|
+      set << {
+          item: item,
+          rating: rating_of(category, item)
+      }
+    end
+
+    category_ratings.sort_by { |item| item[:rating] }.last[:item]
+  end
+
 end

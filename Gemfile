@@ -35,6 +35,10 @@ gem 'coveralls', require: false
 gem 'httparty'
 gem 'foundation-rails'
 
+group :development do
+  gem 'rails_layout'
+end
+
 group :development, :test do
   gem 'better_errors'
 

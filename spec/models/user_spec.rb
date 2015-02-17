@@ -29,7 +29,7 @@ RSpec.describe User, :type => :model do
 
     it 'is the only style rated if only one rating' do
       beer = FactoryGirl.create :beer
-      FactoryGirl.create(:rating, beer:beer, user:user)
+      user.ratings << FactoryGirl.create(:rating, beer:beer)
 
       expect(user.favorite_style).to eq beer.style
     end
@@ -82,7 +82,7 @@ RSpec.describe User, :type => :model do
 
     it 'is the only rated if only one rating' do
       beer = FactoryGirl.create :beer
-      FactoryGirl.create(:rating, beer:beer, user:user)
+      user.ratings << FactoryGirl.create(:rating, beer:beer)
 
       expect(user.favorite_beer).to eq beer
     end
@@ -134,7 +134,7 @@ RSpec.describe User, :type => :model do
 
   def create_beer_with_rating(score, user)
     beer = FactoryGirl.create :beer
-    FactoryGirl.create(:rating, score:score, beer:beer, user:user)
+    user.ratings << FactoryGirl.create(:rating, score:score, beer:beer)
     beer
   end
 
@@ -147,21 +147,21 @@ RSpec.describe User, :type => :model do
   def create_beers_with_ratings_and_style(*scores, style, user)
     scores.each do |score|
       beer = FactoryGirl.create(:beer, style:style)
-      FactoryGirl.create(:rating, score:score, beer:beer, user:user)
+      user.ratings << FactoryGirl.create(:rating, score:score, beer:beer)
     end
   end
 
   def create_brewery_with_rating(score, user)
     brewery = FactoryGirl.create :brewery
     beer = FactoryGirl.create(:beer, brewery:brewery)
-    FactoryGirl.create(:rating, score:score, beer:beer, user:user)
+    user.ratings << FactoryGirl.create(:rating, score:score, beer:beer)
     brewery
   end
 
   def create_ratings_for_brewery(*scores, brewery, user)
     scores.each do |score|
       beer = FactoryGirl.create(:beer, brewery:brewery)
-      FactoryGirl.create(:rating, score:score, beer:beer, user:user)
+      user.ratings << FactoryGirl.create(:rating, score:score, beer:beer)
     end
   end
 

@@ -1,16 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.n. Lisää käyttäjän sivulle tieto käyttäjän mielipanimosta.
-
-Tee tarvittaessa apumetodeja rspec-tiedostoon, jotta testisi pysyv
+# This file should contain all the record creation needed to seed the database with its default values.n.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
-b1 = Brewery.create name:"Koff", year:1897
-b2 = Brewery.create name:"Malmgard", year:2001
-b3 = Brewery.create name:"Weihenstephaner", year:1042
-
-b1.beers.create name:"Iso 3", style:"Lager"
-b1.beers.create name:"Karhu", style:"Lager"
-b1.beers.create name:"Tuplahumala", style:"Lager"
-b2.beers.create name:"Huvila Pale Ale", style:"Pale Ale"
-b2.beers.create name:"X Porter", style:"Porter"
-b3.beers.create name:"Hefezeizen", style:"Weizen"
-b3.beers.create name:"Helles", style:"Lager"
+User.create username:'Admin', password: 'Test1', password_confirmation: 'Test1', admin: true
