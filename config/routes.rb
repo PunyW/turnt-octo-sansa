@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
-  resources :styles
-
-  resources :beer_clubs
-
-  resources :users
-
   root 'breweries#index'
 
+  resources :styles
+  resources :beer_clubs
+  resources :users
   resources :beers
   resources :breweries
   resources :ratings, only: [:index, :new, :create, :destroy]
@@ -18,6 +15,9 @@ Rails.application.routes.draw do
 
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
+  get 'beerlist', to: 'beers#list'
+  get 'ngbeerlist', to: 'beers#nglist'
+  get 'brewerylist', to: 'breweries#list'
 
   post 'places', to: 'places#search'
 

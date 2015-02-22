@@ -60,6 +60,8 @@ group :development, :test do
 	# Guard
 	gem 'guard'
 	gem 'guard-rspec', require: false
+
+  gem 'jquery-turbolinks'
 end
 
 group :test do
@@ -68,6 +70,8 @@ group :test do
   gem 'launchy'
   gem 'simplecov', require: false
   gem 'webmock'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 group :production do

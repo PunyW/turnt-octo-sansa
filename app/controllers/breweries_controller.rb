@@ -1,13 +1,20 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :list]
   before_action :ensure_that_admin, only: [:destroy]
 
   # GET /breweries
   # GET /breweries.json
   def index
+    @breweries = Brewery.all
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
+
+    order = params[:order] || 'name'
+    session[:breweries_sort_order] = session[:breweries_sort_order] == 'asc' ? 'desc' : 'asc'
+
+    @active_breweries = set_order @active_breweries, order
+    @retired_breweries = set_order @retired_breweries, order
   end
 
   # GET /breweries/1
@@ -22,6 +29,10 @@ class BreweriesController < ApplicationController
 
   # GET /breweries/1/edit
   def edit
+  end
+
+  def list
+    render 'brewerylist'
   end
 
   # POST /breweries
@@ -82,5 +93,13 @@ class BreweriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def brewery_params
       params.require(:brewery).permit(:name, :year, :active)
+    end
+
+    def set_order(list, order)
+      direction = session[:breweries_sort_order]
+      return case order
+                 when 'name' then list.order(name: direction)
+                 when 'year' then list.order(year: direction)
+               end
     end
 end
