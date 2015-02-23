@@ -1,9 +1,4 @@
-<% if notice %>
-    <div class="panel">
-      <h5><%= notice %></h5>
-    </div>
-<% end %>
-
+<% cache @beer do %>
 <p>
   <strong>Name:</strong>
   <%= @beer.name %>
@@ -26,6 +21,7 @@
       Has <%= pluralize(@beer.ratings.count, 'rating') %>, with average of <%= @beer.average_rating %>
   <% end %>
 </p>
+<% end %>
 
 <% if current_user %>
     <h4>Give a rating:</h4>

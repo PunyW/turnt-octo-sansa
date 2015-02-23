@@ -10,7 +10,7 @@ class MembershipsController < ApplicationController
     if @membership.save
       if current_user.memberships.find_by(beer_club_id: params[:membership][:beer_club_id]).nil?
         current_user.memberships << @membership
-        flash[:notice] = "#{current_user.username}, welcome to the club!"
+        flash[:notice] = "#{current_user.username}, your application has been sent!"
         redirect_to beer_club_path @membership.beer_club_id
       else
         redirect_to user_path current_user
@@ -27,5 +27,13 @@ class MembershipsController < ApplicationController
 
     membership.destroy
     redirect_to user_path current_user
+  end
+
+  def update
+    membership = Membership.find_by(user_id:params[:user_id], beer_club_id:params[:beer_club_id])
+    membership.confirmed = true
+    flash[:notice] = "Accepted #{membership.user.username} into club" if membership.save
+
+    redirect_to :back
   end
 end

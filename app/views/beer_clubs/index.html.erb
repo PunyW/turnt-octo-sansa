@@ -23,5 +23,6 @@
 </table>
 
 <br>
-
+<% if current_user %>
 <%= link_to 'New Beer club', (new_beer_club_path if current_user), class: 'button success'  %>
+<% end %>

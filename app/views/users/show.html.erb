@@ -46,11 +46,31 @@
       <tbody>
       <% @user.beer_clubs.each do |club| %>
           <tr>
-            <td><%= club %></td>
+            <% if club.confirmation_requests.find_by(user_id: @user.id).nil? %>
+              <td><%= club %></td>
+            <% end %>
           </tr>
       <% end %>
       </tbody>
     </table>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Applied membership of</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @user.beer_clubs.each do |club| %>
+      <tr>
+        <% if !club.confirmation_requests.find_by(user_id: @user.id).nil? %>
+          <td><%= club %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 <% end %>
 
 <% if current_user.admin %>

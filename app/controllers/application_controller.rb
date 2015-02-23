@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :not_a_member
+  helper_method :waiting_club_confirmation
 
   def current_user
     return nil if session[:user_id].nil?
@@ -16,7 +17,21 @@ class ApplicationController < ActionController::Base
   end
 
   def not_a_member
-    current_user.memberships.find_by(beer_club_id: params[:id]).nil?
+    membership = current_user.memberships.find_by(beer_club_id: params[:id])
+    if membership.nil?
+      return true
+    else
+      return membership.confirmed ? false : true
+    end
+  end
+
+  def waiting_club_confirmation
+    membership = current_user.memberships.find_by(beer_club_id: params[:id])
+    if membership.nil?
+      return false
+    else
+      return membership.confirmed ? false : true
+    end
   end
 
   def ensure_that_admin

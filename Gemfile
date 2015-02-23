@@ -34,9 +34,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'coveralls', require: false
 gem 'httparty'
 gem 'foundation-rails'
+gem 'omniauth-github'
 
 group :development do
   gem 'rails_layout'
+  gem 'rack-mini-profiler'
 end
 
 group :development, :test do

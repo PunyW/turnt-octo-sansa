@@ -2,6 +2,8 @@ class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
   before_action :ensure_that_signed_in, except: [:index, :show, :list]
   before_action :ensure_that_admin, only: [:destroy]
+  after_action :expire_fragment_brewerylist, only: [:create, :update, :destroy]
+  before_action :skip_if_cached, only: [:index]
 
   # GET /breweries
   # GET /breweries.json
@@ -10,11 +12,10 @@ class BreweriesController < ApplicationController
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
 
-    order = params[:order] || 'name'
     session[:breweries_sort_order] = session[:breweries_sort_order] == 'asc' ? 'desc' : 'asc'
 
-    @active_breweries = set_order @active_breweries, order
-    @retired_breweries = set_order @retired_breweries, order
+    @active_breweries = set_order @active_breweries, @order
+    @retired_breweries = set_order @retired_breweries, @order
   end
 
   # GET /breweries/1
@@ -101,5 +102,14 @@ class BreweriesController < ApplicationController
                  when 'name' then list.order(name: direction)
                  when 'year' then list.order(year: direction)
                end
+    end
+
+    def expire_fragment_brewerylist
+      ['breweries-name', 'breweries-year'].each{ |f| expire_fragment(f) }
+    end
+
+    def skip_if_cached
+      @order = params[:order] || 'name'
+      return render :index if fragment_exist?( "breweries-#{@order}"  )
     end
 end

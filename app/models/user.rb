@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  require 'securerandom'
   include RatingAverage
 
   has_secure_password
@@ -11,6 +12,15 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true,
             length: { minimum: 3, maximum: 15 }
   validates :password, allow_nil: true, :format => {with: /((?=.*\d)(?=.*[A-Z]).{4,})/, message: 'must be at least 4 characters long and include one uppercase letter and one number' }
+
+  def self.github_oauth(auth_info)
+    if user = User.find_by(username: auth_info.nickname)
+      user
+    else
+      password = SecureRandom.base64(25)
+      User.create!(username: auth_info.nickname, password: password, password_confirmation: password)
+    end
+  end
 
   def favorite_beer
     return nil if ratings.empty?
