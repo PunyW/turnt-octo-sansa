@@ -35,6 +35,7 @@ gem 'coveralls', require: false
 gem 'httparty'
 gem 'foundation-rails'
 gem 'omniauth-github'
+gem 'jquery-turbolinks'
 
 group :development do
   gem 'rails_layout'
@@ -59,11 +60,9 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'rspec-its'
 
-	# Guard
-	gem 'guard'
-	gem 'guard-rspec', require: false
-
-  gem 'jquery-turbolinks'
+  # Guard
+  gem 'guard'
+  gem 'guard-rspec', require: false
 end
 
 group :test do
